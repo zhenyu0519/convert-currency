@@ -8,7 +8,8 @@ const cc = require("currency-codes");
 // config dotenv
 if (process.env.NODE_ENV !== "production") require("dotenv").config();
 
-const api_key = process.env.API_KEY;
+// const api_key = process.env.API_KEY;
+const api_key = "2fd770a7c43058e3cc8f8d6b26276bf9"
 
 const app = express();
 const port = process.env.PORT || 5000;
