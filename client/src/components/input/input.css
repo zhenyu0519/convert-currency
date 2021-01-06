@@ -1,0 +1,13 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+form,
+select,
+input,
+label {
+  padding: 4px 2px;
+  margin-bottom: 5px;
+  overflow: hidden;
+}
