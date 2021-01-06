@@ -11,6 +11,9 @@ interface Props {
   fromInput: string;
   toInput: string;
   from: boolean;
+  defaultSrcCountry: string;
+  defaultSrcAmount: string;
+  defaultDesCountry: string;
 }
 
 class App extends Component<{}, Props> {
@@ -23,6 +26,9 @@ class App extends Component<{}, Props> {
       fromInput: "1",
       toInput: "1",
       from: true,
+      defaultSrcCountry: "",
+      defaultSrcAmount: "1",
+      defaultDesCountry: "",
     };
   }
 
@@ -45,20 +51,26 @@ class App extends Component<{}, Props> {
   };
 
   componentDidMount() {
-    this.getCountries().then((res) => {
-      this.setState({ countries: res });
-    });
+    this.getCountries()
+      .then((res) => {
+        this.setState({
+          countries: res,
+          selectFrom: res[0].currencycode,
+          selectTo: res[0].currencycode,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   // select source contry
   handleSelectFrom = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    console.log(e.target.value);
     this.setState({ selectFrom: e.target.value });
   };
 
   // input the source country amount
   handleFromInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.value);
     if (e.target.value !== "") {
       this.setState({ fromInput: parseFloat(e.target.value).toString() });
     } else {
@@ -80,7 +92,6 @@ class App extends Component<{}, Props> {
 
   // select destination country
   handleSelectTo = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    console.log(e.target.value);
     this.setState({ selectTo: e.target.value });
   };
 
@@ -90,8 +101,9 @@ class App extends Component<{}, Props> {
       fromInput,
       from,
       toInput,
+      defaultSrcCountry,
+      defaultDesCountry,
     } = this.state;
-
     return (
       <div className="App">
         <div className="converter" id="converter">
@@ -104,6 +116,7 @@ class App extends Component<{}, Props> {
               from={from}
               value={fromInput}
               label={"From"}
+              defaultCountry={defaultSrcCountry}
             />
             <button
               className="convert"
@@ -118,6 +131,7 @@ class App extends Component<{}, Props> {
               from={!from}
               value={parseFloat(toInput).toFixed(2).toString()}
               label={"To"}
+              defaultCountry={defaultDesCountry}
             />
           </div>
         </div>

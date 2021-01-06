@@ -45,7 +45,6 @@ app.get("/getCountry", (req, res) => {
 // fetch the specified amount of converted money
 app.get("/getAmount", (req, res) => {
   const { from, to, amount } = req.query;
-  console.log(from, to, amount);
   axios({
     method: "get",
     url: `http://apilayer.net/api/convert?access_key=${api_key}&from=${from.toUpperCase()}&to=${to.toUpperCase()}&amount=${amount}`,

@@ -9,6 +9,7 @@ interface Props {
   from: boolean;
   value: string;
   label: string;
+  defaultCountry: string;
 }
 
 export const Input: React.FC<Props> = ({
@@ -18,6 +19,7 @@ export const Input: React.FC<Props> = ({
   from,
   value,
   label,
+  defaultCountry,
 }) => {
   return (
     <form className="form" id="form">
